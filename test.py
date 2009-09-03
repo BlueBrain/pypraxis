@@ -22,20 +22,18 @@ def fmin_praxis(func, x0, args=(), ftol=1e-5, maxstep=1.0, disp=1):
     *Other Parameters*:
 
       ftol : float
-          fmin_praxis attempts to return fopt sich that if x0 it the
+          fmin_praxis attempts to return fopt such that if x0 is the
           true local minimum near xopt, then 
           norm(x-x0) < ftol + sqrt(macheps)*norm(xopt)
       maxstep : int
-          maxstep is the maximum step size. maxstep should be set to
-          about the maximum distance from the initial guess to the
-          minimum. If maxstep is set too large or too small, the
-          initial rate of convergence may be slow.
+          maximum step size. maxstep should be set to about the
+          maximum distance from the initial guess to the minimum. If
+          maxstep is set too large or too small, the initial rate of
+          convergence may be slow.
       disp : int
           controls the printing of intermediate results. Id disp=0,
           nothing is printed. Will be more and more verbose up to
           prin=4.
-      eps : float
-          eps is the machine precision.
 
     """
 
