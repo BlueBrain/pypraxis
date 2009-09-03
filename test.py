@@ -18,6 +18,8 @@ def fmin_praxis(func, x0, args=(), ftol=1e-5, maxstep=1.0, disp=1):
 
         xopt : ndarray
             Parameter which minimizes `func`.
+        fopt : number
+            Value of function at minimum: ``fopt = func(xopt)``.
 
     *Other Parameters*:
 
