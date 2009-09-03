@@ -15,7 +15,7 @@ python module praxis ! in
         function praxis(t0,machep,h0,n,prin,x,f) ! in :praxis:praxis.f
             use praxis__user__routines
             real*8 intent(in) :: t0
-            real*8 intent(hide) :: machep=2.2204460492503131e-16
+            real*8 intent(in) :: machep=2.2204460492503131e-16
             real*8 intent(in) :: h0
             integer intent(hide),depend(x) :: n=len(x)
             integer optional,intent(in) :: prin=1
