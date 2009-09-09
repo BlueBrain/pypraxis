@@ -3,29 +3,28 @@
 
 python module praxis__user__routines 
     interface praxis_user_interface 
-        function f(x,n) result (fx) ! in :praxis:praxis.f:praxis:unknown_interface
-            real*8 dimension(n),intent(in) :: x
-            integer intent(hide),depend(x) :: n=len(x)
-            real*8 :: fx
+        function f(x,n) result (fx) ! in :praxis:praxis.f90:praxis:unknown_interface
+            real(kind=8) dimension(n),intent(in) :: x
+            integer(kind=4) intent(hide),depend(x) :: n=len(x)
+            real(kind=8) :: fx
         end function f
     end interface praxis_user_interface
 end python module praxis__user__routines
+
 python module praxis ! in 
     interface  ! in :praxis
-        function praxis(t0,machep,h0,n,prin,x,f) ! in :praxis:praxis.f
+        function praxis(t0,h0,n,prin,x,f) ! in :praxis:praxis.f90
             use praxis__user__routines
-            real*8 intent(in) :: t0
-            real*8 intent(in) :: machep=2.2204460492503131e-16
-            real*8 intent(in) :: h0
-            integer intent(hide),depend(x) :: n=len(x)
-            integer optional,intent(in) :: prin=1
-            real*8 dimension(n),intent(in,out) :: x
-            external f
-            real*8 intent(hide) :: fmin=1e-8
-            real*8 :: praxis
+            real(kind=8) intent(in) :: t0
+            real(kind=8) intent(in):: h0
+            integer(kind=4) intent(hide),check(len(x)>=n),depend(x) :: n=len(x)
+            integer(kind=4) optional,intent(in):: prin=0
+            real(kind=8) dimension(n),intent(in,out) :: x
+            real(kind=8) external :: f
+            real(kind=8) :: praxis
         end function praxis
     end interface 
 end python module praxis
 
-! This file was auto-generated with f2py (version:2_4422).
+! This file was auto-generated with f2py (version:2_5972).
 ! See http://cens.ioc.ee/projects/f2py2e/

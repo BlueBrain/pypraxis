@@ -2,7 +2,7 @@ import numpy as np
 from scipy.optimize import *
 from praxis import praxis
 
-def fmin_praxis(func, x0, args=(), ftol=1e-4, maxstep=1.0, disp=1, full_output=False):
+def fmin_praxis(func, x0, args=(), ftol=1e-5, maxstep=1.0, disp=1):
     """Minimize a function using Brent's principal axis method.
 
     :Parameters:
@@ -14,7 +14,7 @@ def fmin_praxis(func, x0, args=(), ftol=1e-4, maxstep=1.0, disp=1, full_output=F
       args : tuple
           Extra arguments passed to func.
 
-    :Returns: (xopt, {fopt})
+    :Returns: (xopt, fopt)
 
         xopt : ndarray
             Parameter which minimizes `func`.
@@ -36,20 +36,15 @@ def fmin_praxis(func, x0, args=(), ftol=1e-4, maxstep=1.0, disp=1, full_output=F
           controls the printing of intermediate results. Id disp=0,
           nothing is printed. Will be more and more verbose up to
           prin=4.
-      full_output : bool
-          If True, xopt and fopt are returned.
 
     """
 
     eps = np.finfo(np.double).eps
 
     fopt, xopt = praxis( t0=ftol, h0=maxstep, x=x0, f=func,
-                         f_extra_args = args, prin=disp)
+                         f_extra_args = args, prin=disp, machep=eps)
 
-    if full_output:
-        return xopt, fopt
-    else:
-        return xopt
+    return xopt, fopt
 
 def main():
     import time

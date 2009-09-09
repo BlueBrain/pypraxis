@@ -1,0 +1,31 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module praxis__user__routines 
+    interface praxis_user_interface 
+        function f(x,n) result (fx) ! in :praxis:praxis.f:praxis:unknown_interface
+            real*8 dimension(n),intent(in) :: x
+            integer intent(hide),depend(x) :: n=len(x)
+            real*8 :: fx
+        end function f
+    end interface praxis_user_interface
+end python module praxis__user__routines
+python module praxis ! in 
+    interface  ! in :praxis
+        function praxis(t0,machep,h0,n,prin,x,f) ! in :praxis:praxis.f
+            use praxis__user__routines
+            real*8 intent(in) :: t0
+            real*8 intent(in) :: machep=2.2204460492503131e-16
+            real*8 intent(in) :: h0
+            integer intent(hide),depend(x) :: n=len(x)
+            integer optional,intent(in) :: prin=1
+            real*8 dimension(n),intent(in,out) :: x
+            external f
+            real*8 intent(hide) :: fmin=1e-8
+            real*8 :: praxis
+        end function praxis
+    end interface 
+end python module praxis
+
+! This file was auto-generated with f2py (version:2_4422).
+! See http://cens.ioc.ee/projects/f2py2e/
